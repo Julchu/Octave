@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import {Row, Col, Input, Card, Image} from "antd";
+import {Row, Col, Input, Card, Rate} from "antd";
+import { FaSpotify } from "react-icons/fa";
 
 import Albums from "./Albums";
 import axios from "axios"
@@ -32,7 +33,6 @@ let search = async (token, input, type) => {
 				"Accept": "application/json"
 			}
 		});
-		console.log(response.data.artists);
 		return response.data.artists;
 	} catch (error) {
 		console.error(error);
@@ -45,14 +45,17 @@ let populateStates = (data, setArtists) => {
 	if (data) {
 		if (data.items) {
 			data.items.forEach(artist => {
-				
+				console.log(artist.popularity);
 				let artistInfo = {
 					name: artist.name,
 					image: artist.images,
-					popularity: artist.popularities,
+
+					// Setting popularity for Ant Design star rating; half stars allow for rating out of 10
+					popularity: (Math.ceil((artist.popularity+1)/10)-1)/2,
 					followers: artist.followers.total
 				};
-
+				
+				// Getting highest resolution image
 				if (artist.images.length > 0) {
 					artistInfo.image = artist.images[0].url;
 				}
@@ -61,6 +64,7 @@ let populateStates = (data, setArtists) => {
 			});
 		}
 	}
+	// Filling artists state with array of artists
 	setArtists(artists);
 };
 
@@ -71,7 +75,7 @@ let Artists = (props) => {
 
 	// State Hooks
 	let [input, setInput] = useState(""); // Artist search inputs
-	let [artists, setArtists] = useState([]); // Array of artist objects containing artist information: name, images[], popularities, followers
+	let [artists, setArtists] = useState([]); // Array of artist objects containing artist information: name, images[], popularity, followers
 
 	// Ant Design enter button callback function
 	let handleKeyDown = async () => {
@@ -110,6 +114,7 @@ let Artists = (props) => {
 			<Row gutter={[4, 16]}>
 				<Col className="gutter-row" span={24}>
 					<Input
+						prefix={<FaSpotify />}
 						size="large" 
 						placeholder="Search for an artist…" 
 						allowClear="true" 
@@ -123,7 +128,9 @@ let Artists = (props) => {
 			<Row gutter={[16, 16]}>
 				{artists.map((artist, index) => (
 					<Col className="gutter-row" span={4}>
-						<Card
+
+						{/* Card onClick displays albums for artists */}
+						<Card onClick={() => {console.log("yes")}}
 							// style={{ maxHeight: "10%" }}
 							type="inner"
 							hoverable="true"
@@ -133,6 +140,7 @@ let Artists = (props) => {
 							title={artist.name}
 						/>
 						Followers: {artist.followers}
+						<Rate disabled value={artist.popularity} allowHalf="true"/>
 						</Card>
 					</Col>					
 				))}
