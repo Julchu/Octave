@@ -1,62 +1,46 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Modal } from 'react-bootstrap';
-import axios from "axios"
+import React, {useState, useEffect} from 'react';
+import Artists from "./Artists";
+import spotifyURL from "../SpotifyAuth";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+// CSS Frameworks
+import {Button} from "antd";
+
+import 'antd/dist/antd.css';
 import "../CSS/Search.css"
 
-// Axios API call for Spotify Implicit Grant
-let authenticate = (setStatus) => {
-	// axios.get("https://accounts.spotify.com/authorize").then(res => {
-	// 	this.setState({
-	// 		CADRate: res.data.rates.CAD
-	// 	});
-	// });
-	setStatus(true);
-}
+// Authenticate user login status
+let authenticate = () => {
+	window.location.href = spotifyURL;
+};
 
 let Dashboard = () => {
 	// Login status
-	let [status, setStatus] = useState(false);
-	
-	// Modal for Spotify popup
-	let [show, setShow] = useState(false);
-	let handleClose = () => setShow(false);
-	let handleClose = () => setShow(true);
+	let [status, setStatus] = useState("false");
+	let [token, setToken] = useState("");
 
-	// clientId
-	// responseType
-	// redirectUri = "localhost:3000";
-	// state
-	// scop
+	// On page loads, check website hash to see if user is authenticated from Spotify
+	useEffect(() => {
+		let hash = window.location.hash;
+		if (hash) {
+			window.location.hash = "";
+			setStatus(true);
+			setToken(hash.split("&")[0].replace("#access_token=", ""));
+		}
+	}, [status]);
 
-	// Authenticate user login status
-	// authenticate(setStatus)
-	// console.log(status.status)
-
-	// if (status.status) {
-		
-	// } else {
-	// 	// return <button onClick={() => setStatus(true)}>Login</button>
-	// 	console.log()
-	// }
-
+	// If authenticated, display Artist component to search/display artists
+	// Else: display button to launch authentication page
 	if (status === true) {
-		return <Button variant="outline-primary">Search for an artist...</Button>
+		return (
+			<>
+				{/* Spotify developer access token required for making Spotify API calls */}
+				<Artists token={token}/>
+			</>
+		)
 	} else {
-		return <Button variant="outline-primary" onClick={() => {authenticate(setShow, setStatus)}}>Login</Button>
+		// Button onClick redirects to Spotify authentication page
+		return <Button size="large" block="true" onClick={() => {authenticate()}}>Login</Button>
 	}
-}
-
-// Popup modal for Spotify auth
-let Popup = () => {
-
-
-	return 
-}
+};
 
 export default Dashboard;
-
-{/* <button >
-
-</button> */}

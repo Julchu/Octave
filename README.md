@@ -1,3 +1,7 @@
+# REMINDER: remove Spotify client ID
+
+# TODO: populate multiple pages of artist cards based on results with a lot of information
+
 # TouchTunes Web Assignment
 
 Congratulations! You have been assigned this exercise because we want to evaluate your technical skills and experience.
