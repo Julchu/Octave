@@ -6,7 +6,7 @@ Clone repository into a new folder and navigate to it in command line
 Edit SpotifyAuth.js in `Octave/src` and enter your Spotify client ID
 
 Installation instructions:
-``npm install``
+`npm installe`
 `npm start`
 
 Browser tab should open to http://localhost:8888, but if not, navigate to that page
