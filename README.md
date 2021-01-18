@@ -12,6 +12,7 @@ Edit SpotifyAuth.js in `Octave/src` and enter your Spotify client ID
 
 ## Notes
 Browser tab should open to http://localhost:8888, but if not, navigate to that page
+
 (Disable addons that might block requests to Spotify API (ex: Privacy Badger), will cause CORS error)
 
 # TouchTunes Web Assignment
