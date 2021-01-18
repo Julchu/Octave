@@ -1,12 +1,15 @@
 # Instructions
-Edit SpotifyAuth.js and enter your Spotify client ID
+Clone repository into a new folder and navigate to it in command line
+`git clone https://github.com/JulChu/Octave.git`
+`cd Octave`
 
-React installation commands:
+Edit SpotifyAuth.js in `Octave/src` and enter your Spotify client ID
+
+Installation instructions:
 `npm install`
 `npm start`
 
 Browser tab should open to http://localhost:8888, but if not, navigate to that page
-
 (Disable addons that might block requests to Spotify API (ex: Privacy Badger), will cause CORS error)
 
 # TODO: populate results exceeding default Spotify query search limit
