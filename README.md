@@ -1,14 +1,15 @@
 # Instructions
 Edit SpotifyAuth.js and enter your Spotify client ID
 
+React installation commands:
 `npm install`
 `npm start`
 
-Disable addons that might block requests to Spotify API (ex: Privacy Badger), will cause CORS error
+Browser tab should open to http://localhost:8888, but if not, navigate to that page
 
-# REMINDER: remove Spotify client ID
+(Disable addons that might block requests to Spotify API (ex: Privacy Badger), will cause CORS error)
 
-# TODO: populate multiple pages of artist cards based on results with a lot of information
+# TODO: populate results exceeding default Spotify query search limit
 
 # TouchTunes Web Assignment
 
