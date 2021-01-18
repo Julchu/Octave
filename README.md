@@ -1,3 +1,11 @@
+# Instructions
+Edit SpotifyAuth.js and enter your Spotify client ID
+
+`npm install`
+`npm start`
+
+Disable addons that might block requests to Spotify API (ex: Privacy Badger), will cause CORS error
+
 # REMINDER: remove Spotify client ID
 
 # TODO: populate multiple pages of artist cards based on results with a lot of information
